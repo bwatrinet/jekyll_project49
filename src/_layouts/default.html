@@ -1,20 +1,16 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
   {% include head.html %}
 
-  <body>
-
+  <body class="is-boxed has-animations">
+    <div class="body-wrap boxed-container">
     {% include header.html %}
-    <div id="root"></div>
-    <div class="page-content">
-      <div class="wrapper">
-        {{ content }}
-      </div>
-    </div>
-
+    {{ content }}
     {% include footer.html %}
-    <script type="text/javascript" src="/assets/javascripts/bundle.js" charset="utf-8"></script>
+    </div>
+    <script src="public/assets/js/main.min.js"></script>
+
   </body>
 
 </html>

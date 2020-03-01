@@ -1,32 +1,44 @@
 {
-  "name": "jekyll-webpack-react",
+  "name": "jekyll-test-49",
   "version": "1.0.0",
-  "description": "A simple boilerplate for webpack and jekyll integration.",
-  "main": "bundle.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "description": "A simple boilerplate for jekyllizing a cruip html template.",
+  "author": "Benjamin Watrinet <watrinet@gmail.com>",
+  "license": "GPLv3",
+  "main": ".eslintrc.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/allizad/jekyll-webpack.git"
+    "url": "git@github.com:bwatrinet/jekyll_project49.git"
+  },
+   "bugs": {
+    "url": "https://github.com/bwatrinet/jekyll_project49/issues"
   },
   "keywords": [
     "jekyll",
-    "webpack",
-    "react"
+    "template",
+    "saas"
   ],
-  "author": "Allison Zadrozny",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/allizad/jekyll-webpack/issues"
+  "homepage": "https://github.com/bwatrinet/jekyll_project49#readme",
+  "scripts": {
+    "clean": "rimraf public/{css/*,assets/js/*,assets/images/*}",
+    "autoprefixer": "postcss -u autoprefixer -r public/css/*",
+    "scss": "node-sass --output-style compressed -o public/css src/_sass",
+    "lint": "eslint src/assets/js || true",
+    "lint-scss": "stylelint src/_sass/*.scss --syntax scss || true",
+    "uglify": "mkdirp public/assets/js -p && uglifyjs src/assets/js/*.js -m -c -o public/assets/js/main.min.js",
+    "imagemin": "imagemin src/assets/images/* -o public/assets/images",
+    "serve": "browser-sync start --server --files \"public/css/*.css, public/assets/js/*.js, **/*.html, !node_modules/**/*.html\"",
+    "build:css": "run-s lint-scss scss autoprefixer",
+    "build:js": "run-s lint uglify",
+    "build:images": "run-s imagemin",
+    "build": "run-s build:*",
+    "watch:css": "onchange \"src/_sass\" -- run-s build:css",
+    "watch:js": "onchange \"src/assets/js\" -- run-s build:js",
+    "watch:images": "onchange \"src/assets/images\" -- run-s build:images",
+    "watch": "run-p serve watch:*",
+    "postinstall": "run-s build watch"
   },
-  "homepage": "https://github.com/allizad/jekyll-webpack#readme",
   "devDependencies": {
     "autoprefixer": "^9.0.1",
-    "babel-core": "^6.26.3",
-    "babel-loader": "^7.1.5",
-    "babel-preset-es2015": "^6.24.1",
-    "babel-preset-react": "^6.24.1",
     "browser-sync": "^2.12.8",
     "eslint": "^5.2.0",
     "eslint-config-standard": "^12.0.0",
@@ -40,12 +52,8 @@
     "npm-run-all": "^4.1.3",
     "onchange": "^4.1.0",
     "postcss-cli": "^6.0.0",
-    "react": "^16.13.0",
-    "react-addons-update": "^15.6.2",
-    "react-dom": "^16.13.0",
     "rimraf": "^2.5.4",
     "stylelint": "^9.4.0",
-    "uglify-es": "^3.3.10",
-    "webpack": "^4.41.6"
-  }
+    "uglify-es": "^3.3.10"
+    }
 }
